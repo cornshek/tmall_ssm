@@ -1,5 +1,7 @@
 package org.shek.tmall.pojo;
 
+import org.shek.tmall.service.OrderService;
+
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class Order {
 
     private User user;
 
-    private float total;
+    private float totalSum;
 
     private int totalNumber;
 
@@ -55,12 +57,12 @@ public class Order {
         this.user = user;
     }
 
-    public float getTotal() {
-        return total;
+    public float getTotalSum() {
+        return totalSum;
     }
 
-    public void setTotal(float total) {
-        this.total = total;
+    public void setTotalSum(float total) {
+        this.totalSum = total;
     }
 
     public int getTotalNumber() {
@@ -179,7 +181,26 @@ public class Order {
     public String getStatusCN() {
         String CN = "未知";
         switch (status) {
-
+            case OrderService.waitPay:
+                CN="待付款";
+                break;
+            case OrderService.waitDelivery:
+                CN="待发货";
+                break;
+            case OrderService.waitConfirm:
+                CN="待收货";
+                break;
+            case OrderService.waitReview:
+                CN="等评价";
+                break;
+            case OrderService.finish:
+                CN="完成";
+                break;
+            case OrderService.delete:
+                CN="刪除";
+                break;
+            default:
+                CN="未知";
         }
         return CN;
     }
